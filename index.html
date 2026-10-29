@@ -4,18 +4,1004 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>محمد جواد کرمانی | طراح لوگو و هویت بصری — JIMDESIGN</title>
-    <!-- Google Fonts -->
+    
+    <!-- Google Fonts: Vazirmatn (فارسی), Syne & Space Grotesk (عریض به سبک Panchang در پی‌دی‌اف), Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <meta http-equiv="refresh" content="0; url=https://sonic-birch-ou9b5ld.tmp.now">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                        wide: ['Syne', 'Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#FAF9F6',
+                            card: '#FFFFFF',
+                            text: '#18181B',
+                            muted: '#71717A',
+                            border: '#E4E4E7',
+                            dark: '#0E0F12',
+                            darkCard: '#15161A',
+                            accent: '#C2593F',
+                            navy: '#352C73',
+                            teal: '#4AA7B4',
+                            pink: '#F9B4B0'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #FAF9F6;
+            color: #18181B;
+            font-family: 'Vazirmatn', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Panchang-inspired wide English typography from PDF */
+        .pdf-label {
+            font-family: 'Syne', 'Space Grotesk', sans-serif;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF9F6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4D4D8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A1A1AA;
+        }
+
+        .gallery-thumb.active {
+            border-color: #18181B;
+            opacity: 1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+
+        /* Modal transitions */
+        #lightboxModal {
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+        #lightboxModal.hidden-modal {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #lightboxModal.active-modal {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+    </style>
 </head>
-<body class="bg-[#FAF9F6] text-stone-900 font-sans p-8 flex items-center justify-center min-h-screen">
-    <div class="text-center space-y-4 max-w-md">
-        <h1 class="text-2xl font-bold">محمد جواد کرمانی — JIMDESIGN</h1>
-        <p class="text-stone-600 text-sm">در حال انتقال به نسخه زنده و کامل پورتفولیو...</p>
-        <a href="https://sonic-birch-ou9b5ld.tmp.now" class="inline-block px-6 py-2.5 bg-black text-white rounded-full text-xs font-mono">مشاهده زنده پورتفولیو ↗</a>
+<body class="selection:bg-stone-800 selection:text-white antialiased min-h-screen">
+
+    <!-- 1. STICKY TOP NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-[#FAF9F6]/95 backdrop-blur-md border-b border-brand-border">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Mark -->
+            <a href="#" class="flex items-center gap-3 group">
+                <span class="pdf-label font-black text-xl sm:text-2xl text-brand-text group-hover:text-stone-600 transition-colors">JIMDESIGN</span>
+                <span class="hidden sm:inline-block w-px h-5 bg-brand-border"></span>
+                <span class="hidden sm:inline-block text-xs text-brand-muted font-normal">محمد جواد کرمانی</span>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-xs font-semibold text-brand-muted">
+                <a href="#works" class="hover:text-brand-text transition-colors">پروژه‌ها</a>
+                <a href="#process" class="hover:text-brand-text transition-colors">فرآیند دیزاین</a>
+                <a href="#about" class="hover:text-brand-text transition-colors">درباره من</a>
+                <a href="#contact" class="hover:text-brand-text transition-colors">ارتباط</a>
+            </nav>
+
+            <!-- Status & CTA -->
+            <div class="flex items-center gap-4">
+                <div class="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-stone-100 border border-brand-border text-stone-700 text-xs font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>در دسترس برای پروژه جدید</span>
+                </div>
+                <a href="#contact" class="px-5 py-2.5 rounded-full bg-brand-text text-white text-xs sm:text-sm font-medium hover:bg-black transition-all">
+                    شروع گفتگو
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section class="max-w-7xl mx-auto px-5 sm:px-8 pt-16 sm:pt-24 pb-16 border-b border-brand-border/60">
+        <div class="max-w-4xl space-y-6">
+            <!-- Tag -->
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-stone-100 border border-brand-border text-xs text-brand-muted font-mono">
+                <span class="pdf-label font-bold text-stone-800">PORTFOLIO</span>
+                <span>•</span>
+                <span>طراح نشان و هویت بصری</span>
+            </div>
+
+            <!-- Main Heading (Kalameh bold style) -->
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-brand-text tracking-tight leading-[1.14]">
+                محمد جواد کرمانی
+            </h1>
+            
+            <p class="pdf-label text-sm sm:text-base font-bold text-stone-500 tracking-[0.25em]" dir="ltr">
+                LOGO & VISUAL IDENTITY DESIGNER
+            </p>
+
+            <!-- Statement -->
+            <p class="text-base sm:text-lg text-brand-muted leading-relaxed font-normal max-w-2xl pt-1">
+                دانشجوی کارشناسی گرافیک. تمرکز بر پیوند اصالت فرم‌های ایرانی با مینیمالیسم جهانی. 
+                هر پروژه در این پورتفولیو، نتیجه درک صورت مسئله، اتودهای دستی و ساخت نظام هویت بصری ماندگار است.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center gap-4 pt-4">
+                <a href="#works" class="px-6 py-3 rounded-full bg-brand-text text-white text-sm font-medium hover:bg-stone-800 transition-colors inline-flex items-center gap-2">
+                    <span>مشاهده پروژه‌ها</span>
+                    <span>↓</span>
+                </a>
+                <a href="#about" class="px-6 py-3 rounded-full bg-white border border-brand-border text-brand-text text-sm font-medium hover:border-brand-text transition-colors">
+                    درباره من و متدولوژی دیزاین
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. FILTER TABS -->
+    <section id="works" class="max-w-7xl mx-auto px-5 sm:px-8 pt-12 pb-6">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-brand-border/60 pb-6">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-text">گزیده آثار و پرونده‌های هویت بصری</h2>
+                <p class="text-xs sm:text-sm text-brand-muted mt-1">بررسی اتودها، نشان‌ها، سیستم‌های رنگ و ماک‌آپ‌های کاربردی</p>
+            </div>
+            
+            <!-- Category Pills -->
+            <div class="flex flex-wrap items-center gap-2 text-xs font-medium">
+                <button onclick="filterCategory('all')" id="btn-all" class="filter-btn px-4 py-2 rounded-full bg-brand-text text-white transition-all">همه پروژه‌ها</button>
+                <button onclick="filterCategory('identity')" id="btn-identity" class="filter-btn px-4 py-2 rounded-full bg-white border border-brand-border text-brand-muted hover:text-brand-text transition-all">هویت بصری جامع</button>
+                <button onclick="filterCategory('packaging')" id="btn-packaging" class="filter-btn px-4 py-2 rounded-full bg-white border border-brand-border text-brand-muted hover:text-brand-text transition-all">بسته‌بندی و محصول</button>
+                <button onclick="filterCategory('redesign')" id="btn-redesign" class="filter-btn px-4 py-2 rounded-full bg-white border border-brand-border text-brand-muted hover:text-brand-text transition-all">ریدیزاین لوگو</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. DETAILED PROJECTS SHOWCASE (With Proper Aspect Ratios & Real Sketches) -->
+    <main class="max-w-7xl mx-auto px-5 sm:px-8 py-8 space-y-24">
+
+        <!-- ============================================== -->
+        <!-- PROJECT 1: IRATAN (ایراتن) - FULL SHOWCASE -->
+        <!-- ============================================== -->
+        <article class="project-item bg-white border border-brand-border rounded-2xl overflow-hidden shadow-sm" data-category="identity">
+            <!-- Project Header -->
+            <div class="p-6 sm:p-10 border-b border-brand-border bg-stone-50/50 flex flex-wrap items-start justify-between gap-6">
+                <div class="space-y-2 max-w-2xl">
+                    <div class="flex items-center gap-3">
+                        <span class="pdf-label text-xs font-bold px-2.5 py-1 rounded bg-stone-200 text-stone-800">PROJECT 01</span>
+                        <span class="text-xs text-brand-muted font-mono">ارائه لوگوتایپ‌های پیشنهادی • شهریور ۱۴۰۳</span>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-black text-brand-text">پروژه هویت بصری ایراتن</h3>
+                    <p class="text-sm sm:text-base text-brand-muted font-normal leading-relaxed">
+                        کانسپت و جوهره برند: <strong class="text-brand-text">«مینیمال و امروزی، پریمیوم، دارای اصالت و هویت ایرانی»</strong>. 
+                        شامل ۵ اتود منحصربه‌فرد لوگوتایپ، اسکچ‌های ساختار، خطوط هندسی و ماک‌آپ‌های محیطی در ۳۳ اسلاید.
+                    </p>
+                </div>
+                <!-- Action to open full slide viewer -->
+                <button onclick="openIratanSlider(0)" class="px-5 py-2.5 rounded-full bg-brand-text text-white text-xs sm:text-sm font-medium hover:bg-black transition-all flex items-center gap-2">
+                    <span>مشاهده کامل ۳۳ اسلاید پرزنتیشن</span>
+                    <span>↗</span>
+                </button>
+            </div>
+
+            <!-- Main Interactive Gallery for Iratan -->
+            <div class="p-6 sm:p-10 space-y-8">
+                <!-- Large Active Image Display (Aspect 16:9 - No Cropping!) -->
+                <div class="relative rounded-2xl overflow-hidden bg-darkBg border border-stone-800 cursor-pointer group flex items-center justify-center p-2" onclick="openLightbox(document.getElementById('iratan-main-img').src, document.getElementById('iratan-main-caption').textContent)">
+                    <img id="iratan-main-img" src="assets/projects/iratan/mockup-01.webp" alt="ایراتن" class="w-full max-h-[560px] object-contain rounded-xl group-hover:scale-[1.01] transition-transform duration-500">
+                    <div class="absolute bottom-4 right-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-lg text-white text-xs font-mono flex items-center gap-2">
+                        <span id="iratan-main-caption">ماک‌آپ تابلوی محیطی ایراتن</span>
+                        <span class="text-stone-400">| کلیک برای بزرگنمایی 🔍</span>
+                    </div>
+                </div>
+
+                <!-- 1. THE 5 REAL SKETCHES (حالا خود اتودها و طرح‌های وکتور، نه اسلاید عنوان!) -->
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="pdf-label text-xs font-bold text-brand-text">اتودهای ۵ گانه لوگوتایپ (طرح‌های وکتور واقعی):</h4>
+                        <span class="text-xs text-brand-muted">کلیک کنید تا طرح روی مانیتور بالا قرار گیرد</span>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                        <div onclick="switchIratan('assets/projects/iratan/sketches/sketch-01-vector.webp', 'ایراتن — طرح لوگوتایپ اتود اول (وکتور)', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-900 p-1 transition-all">
+                            <div class="h-24 rounded-lg bg-black flex items-center justify-center p-1 overflow-hidden">
+                                <img src="assets/projects/iratan/sketches/sketch-01-vector.webp" class="h-full w-full object-contain" alt="اتود اول">
+                            </div>
+                            <p class="text-[11px] font-medium text-center mt-1.5 text-stone-700">اتود ۱ (وکتور)</p>
+                        </div>
+                        <div onclick="switchIratan('assets/projects/iratan/sketches/sketch-02-vector.webp', 'ایراتن — طرح لوگوتایپ اتود دوم (کشیدگی افقی)', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-900 p-1 transition-all">
+                            <div class="h-24 rounded-lg bg-black flex items-center justify-center p-1 overflow-hidden">
+                                <img src="assets/projects/iratan/sketches/sketch-02-vector.webp" class="h-full w-full object-contain" alt="اتود دوم">
+                            </div>
+                            <p class="text-[11px] font-medium text-center mt-1.5 text-stone-700">اتود ۲ (وکتور)</p>
+                        </div>
+                        <div onclick="switchIratan('assets/projects/iratan/sketches/sketch-03-vector.webp', 'ایراتن — طرح لوگوتایپ اتود سوم (تقاطع فرم‌ها)', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-900 p-1 transition-all">
+                            <div class="h-24 rounded-lg bg-black flex items-center justify-center p-1 overflow-hidden">
+                                <img src="assets/projects/iratan/sketches/sketch-03-vector.webp" class="h-full w-full object-contain" alt="اتود سوم">
+                            </div>
+                            <p class="text-[11px] font-medium text-center mt-1.5 text-stone-700">اتود ۳ (وکتور)</p>
+                        </div>
+                        <div onclick="switchIratan('assets/projects/iratan/sketches/sketch-04-vector.webp', 'ایراتن — طرح لوگوتایپ اتود چهارم (پیوسته)', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-900 p-1 transition-all">
+                            <div class="h-24 rounded-lg bg-black flex items-center justify-center p-1 overflow-hidden">
+                                <img src="assets/projects/iratan/sketches/sketch-04-vector.webp" class="h-full w-full object-contain" alt="اتود چهارم">
+                            </div>
+                            <p class="text-[11px] font-medium text-center mt-1.5 text-stone-700">اتود ۴ (وکتور)</p>
+                        </div>
+                        <div onclick="switchIratan('assets/projects/iratan/sketches/sketch-05-vector.webp', 'ایراتن — طرح لوگوتایپ اتود پنجم (مونوگرام)', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-900 p-1 transition-all">
+                            <div class="h-24 rounded-lg bg-black flex items-center justify-center p-1 overflow-hidden">
+                                <img src="assets/projects/iratan/sketches/sketch-05-vector.webp" class="h-full w-full object-contain" alt="اتود پنجم">
+                            </div>
+                            <p class="text-[11px] font-medium text-center mt-1.5 text-stone-700">اتود ۵ (وکتور)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. HAND SKETCHES & GEOMETRY GRIDS (خطوط راهنما و طراحی دستی) -->
+                <div class="space-y-3">
+                    <h4 class="pdf-label text-xs font-bold text-stone-500">اسکچ‌های مدادی و گریدبندی هندسی اتودها:</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                        <div onclick="switchIratan('assets/projects/iratan/sketches/sketch-01-paper.webp', 'ایراتن — اتود دستی اول', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-900 p-1 transition-all">
+                            <div class="h-20 rounded-lg bg-black flex items-center justify-center p-1 overflow-hidden">
+                                <img src="assets/projects/iratan/sketches/sketch-01-paper.webp" class="h-full w-full object-contain" alt="اسکچ ۱">
+                            </div>
+                            <p class="text-[10px] text-center mt-1 text-stone-500">اسکچ دستی ۱</p>
+                        </div>
+                        <div onclick="switchIratan('assets/projects/iratan/sketches/sketch-02-paper.webp', 'ایراتن — اتود دستی دوم', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-900 p-1 transition-all">
+                            <div class="h-20 rounded-lg bg-black flex items-center justify-center p-1 overflow-hidden">
+                                <img src="assets/projects/iratan/sketches/sketch-02-paper.webp" class="h-full w-full object-contain" alt="اسکچ ۲">
+                            </div>
+                            <p class="text-[10px] text-center mt-1 text-stone-500">اسکچ دستی ۲</p>
+                        </div>
+                        <div onclick="switchIratan('assets/projects/iratan/sketches/sketch-03-grid.webp', 'ایراتن — گریدبندی اتود سوم', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-900 p-1 transition-all">
+                            <div class="h-20 rounded-lg bg-black flex items-center justify-center p-1 overflow-hidden">
+                                <img src="assets/projects/iratan/sketches/sketch-03-grid.webp" class="h-full w-full object-contain" alt="گرید ۳">
+                            </div>
+                            <p class="text-[10px] text-center mt-1 text-stone-500">گرید هندسی ۳</p>
+                        </div>
+                        <div onclick="switchIratan('assets/projects/iratan/sketches/sketch-04-grid.webp', 'ایراتن — گریدبندی اتود چهارم', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-900 p-1 transition-all">
+                            <div class="h-20 rounded-lg bg-black flex items-center justify-center p-1 overflow-hidden">
+                                <img src="assets/projects/iratan/sketches/sketch-04-grid.webp" class="h-full w-full object-contain" alt="گرید ۴">
+                            </div>
+                            <p class="text-[10px] text-center mt-1 text-stone-500">گرید هندسی ۴</p>
+                        </div>
+                        <div onclick="switchIratan('assets/projects/iratan/sketches/sketch-05-paper.webp', 'ایراتن — اتود دستی پنجم', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-900 p-1 transition-all">
+                            <div class="h-20 rounded-lg bg-black flex items-center justify-center p-1 overflow-hidden">
+                                <img src="assets/projects/iratan/sketches/sketch-05-paper.webp" class="h-full w-full object-contain" alt="اسکچ ۵">
+                            </div>
+                            <p class="text-[10px] text-center mt-1 text-stone-500">اسکچ دستی ۵</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. REAL MOCKUPS STRIP -->
+                <div class="space-y-3">
+                    <h4 class="pdf-label text-xs font-bold text-stone-500">ماک‌آپ‌های محیطی و اداری برند:</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <div onclick="switchIratan('assets/projects/iratan/mockup-01.webp', 'ایراتن — تابلوی محیطی و ساختمانی', this)" class="gallery-thumb active cursor-pointer rounded-xl overflow-hidden border-2 border-brand-text bg-stone-100 p-1">
+                            <img src="assets/projects/iratan/mockup-01.webp" class="w-full h-24 object-cover rounded-lg" alt="ماک‌آپ ۱">
+                            <p class="text-[11px] font-medium text-center mt-1">تابلوی محیطی</p>
+                        </div>
+                        <div onclick="switchIratan('assets/projects/iratan/mockup-02.webp', 'ایراتن — ست اوراق اداری و سربرگ', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-100 p-1">
+                            <img src="assets/projects/iratan/mockup-02.webp" class="w-full h-24 object-cover rounded-lg" alt="ماک‌آپ ۲">
+                            <p class="text-[11px] font-medium text-center mt-1">ست اداری و پاکت</p>
+                        </div>
+                        <div onclick="switchIratan('assets/projects/iratan/mockup-03.webp', 'ایراتن — حکاکی فلزی و پلاک طلایی', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-100 p-1">
+                            <img src="assets/projects/iratan/mockup-03.webp" class="w-full h-24 object-cover rounded-lg" alt="ماک‌آپ ۳">
+                            <p class="text-[11px] font-medium text-center mt-1">حکاکی لوکس فلزی</p>
+                        </div>
+                        <div onclick="switchIratan('assets/projects/iratan/sketches/iratan-all-sketches.webp', 'ایراتن — مقایسه تمام اتودها بر پایه کرسی و تعادل خطی', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent bg-stone-100 p-1">
+                            <img src="assets/projects/iratan/sketches/iratan-all-sketches.webp" class="w-full h-24 object-cover rounded-lg" alt="مقایسه اتودها">
+                            <p class="text-[11px] font-medium text-center mt-1">مقایسه هندسی اتودها</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+        <!-- ============================================== -->
+        <!-- PROJECT 2: PAKIMA (پاکیما) - PACKAGING & STORY -->
+        <!-- ============================================== -->
+        <article class="project-item bg-white border border-brand-border rounded-2xl overflow-hidden shadow-sm" data-category="packaging">
+            <!-- Header -->
+            <div class="p-6 sm:p-10 border-b border-brand-border bg-stone-50/50 flex flex-wrap items-start justify-between gap-6">
+                <div class="space-y-2 max-w-2xl">
+                    <div class="flex items-center gap-3">
+                        <span class="pdf-label text-xs font-bold px-2.5 py-1 rounded bg-stone-200 text-stone-800">PROJECT 02</span>
+                        <span class="text-xs text-brand-muted font-mono">ورکشاپ تلاقی • هدایت علی شیردستیان و علی تقی‌پور</span>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-brand-text">برندینگ و طراحی هویت بصری پاکیما</h3>
+                    <p class="text-base text-brand-accent font-semibold">«به پاکی بوسه مامان»</p>
+                </div>
+            </div>
+
+            <!-- Content Grid: Images + Design Story -->
+            <div class="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left/Main Visuals (7 cols) -->
+                <div class="lg:col-span-7 space-y-4">
+                    <!-- Main display with natural aspect ratio & no chopping -->
+                    <div class="rounded-2xl overflow-hidden bg-stone-50 border border-brand-border cursor-pointer group flex items-center justify-center p-3" onclick="openLightbox(document.getElementById('pakima-main-img').src, 'پاکیما — بسته‌بندی صابون بچه')">
+                        <img id="pakima-main-img" src="assets/projects/pakima/pakima-hero-box.webp" alt="پاکیما" class="w-full max-h-[500px] object-contain rounded-xl group-hover:scale-[1.01] transition-transform duration-500">
+                    </div>
+                    
+                    <!-- 4 Real Stages from the PDF -->
+                    <div class="grid grid-cols-4 gap-2.5">
+                        <div onclick="switchImage('pakima-main-img', 'assets/projects/pakima/pakima-hero-box.webp', this)" class="gallery-thumb active cursor-pointer rounded-xl overflow-hidden border-2 border-brand-text p-1 bg-stone-50">
+                            <img src="assets/projects/pakima/pakima-hero-box.webp" class="w-full h-18 sm:h-20 object-cover rounded-lg" alt="جعبه صابون">
+                            <p class="text-[10px] font-medium text-center mt-1">جعبه محصول</p>
+                        </div>
+                        <div onclick="switchImage('pakima-main-img', 'assets/projects/pakima/pakima-slogan-bars.webp', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent p-1 bg-stone-50">
+                            <img src="assets/projects/pakima/pakima-slogan-bars.webp" class="w-full h-18 sm:h-20 object-cover rounded-lg" alt="شعار برند">
+                            <p class="text-[10px] font-medium text-center mt-1">شعار و صابون</p>
+                        </div>
+                        <div onclick="switchImage('pakima-main-img', 'assets/projects/pakima/pakima-product-lineup.webp', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent p-1 bg-stone-50">
+                            <img src="assets/projects/pakima/pakima-product-lineup.webp" class="w-full h-18 sm:h-20 object-cover rounded-lg" alt="مجموعه محصولات">
+                            <p class="text-[10px] font-medium text-center mt-1">خانواده اقلام</p>
+                        </div>
+                        <div onclick="switchImage('pakima-main-img', 'assets/projects/pakima/pakima-palette-type.webp', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent p-1 bg-stone-50">
+                            <img src="assets/projects/pakima/pakima-palette-type.webp" class="w-full h-18 sm:h-20 object-cover rounded-lg" alt="پالت رنگ">
+                            <p class="text-[10px] font-medium text-center mt-1">پالت و تایپ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right/Design Details (5 cols) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- Design Story -->
+                    <div class="bg-stone-50 p-6 rounded-2xl border border-brand-border">
+                        <h4 class="pdf-label text-xs font-bold text-brand-muted uppercase mb-2">DESIGN STORY (داستان طرح)</h4>
+                        <p class="text-sm text-stone-700 leading-relaxed font-normal">
+                            در ورکشاپ برندینگ و هویت بصری «تلاقی» (با هدایت اساتید علی شیردستیان و علی تقی‌پور)، صابون بچه فیروز را از جوهره برند و نیمینگ تا تکمیل هویت بصری در سه جلسه ورکشاپ بازطراحی کردیم که نتیجه آن شد صابون بچه <strong>پاکیما</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Color Palette -->
+                    <div>
+                        <h4 class="pdf-label text-xs font-bold text-brand-muted uppercase mb-3">COLOR PALETTE (کلیک برای کپی):</h4>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <div onclick="copyHex('#F9B4B0')" class="cursor-pointer p-3 rounded-xl border border-brand-border flex items-center gap-3 bg-white hover:bg-stone-50 transition-colors">
+                                <span class="w-8 h-8 rounded-lg shadow-inner" style="background-color: #F9B4B0;"></span>
+                                <div>
+                                    <p class="text-xs font-mono font-semibold text-stone-800">#F9B4B0</p>
+                                    <p class="text-[10px] text-stone-500">Soft Pink</p>
+                                </div>
+                            </div>
+                            <div onclick="copyHex('#4AA7B4')" class="cursor-pointer p-3 rounded-xl border border-brand-border flex items-center gap-3 bg-white hover:bg-stone-50 transition-colors">
+                                <span class="w-8 h-8 rounded-lg shadow-inner" style="background-color: #4AA7B4;"></span>
+                                <div>
+                                    <p class="text-xs font-mono font-semibold text-stone-800">#4AA7B4</p>
+                                    <p class="text-[10px] text-stone-500">Ocean Teal</p>
+                                </div>
+                            </div>
+                            <div onclick="copyHex('#EAE7DD')" class="cursor-pointer p-3 rounded-xl border border-brand-border flex items-center gap-3 bg-white hover:bg-stone-50 transition-colors">
+                                <span class="w-8 h-8 rounded-lg shadow-inner" style="background-color: #EAE7DD;"></span>
+                                <div>
+                                    <p class="text-xs font-mono font-semibold text-stone-800">#EAE7DD</p>
+                                    <p class="text-[10px] text-stone-500">Warm Ivory</p>
+                                </div>
+                            </div>
+                            <div onclick="copyHex('#352C73')" class="cursor-pointer p-3 rounded-xl border border-brand-border flex items-center gap-3 bg-white hover:bg-stone-50 transition-colors">
+                                <span class="w-8 h-8 rounded-lg shadow-inner" style="background-color: #352C73;"></span>
+                                <div>
+                                    <p class="text-xs font-mono font-semibold text-stone-800">#352C73</p>
+                                    <p class="text-[10px] text-stone-500">Deep Navy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Typography -->
+                    <div class="pt-4 border-t border-brand-border">
+                        <h4 class="pdf-label text-xs font-bold text-brand-muted uppercase mb-2">TYPEFACES:</h4>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="px-3 py-1.5 rounded-lg bg-stone-100 text-stone-800 font-medium">فونت فارسی: کلمه (Kalameh)</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-stone-100 text-stone-800 font-medium">English: Fredoka Font</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+        <!-- ============================================== -->
+        <!-- PROJECT 3: ZHOANA (ژوانا) - GREENHOUSE & CAFE -->
+        <!-- ============================================== -->
+        <article class="project-item bg-white border border-brand-border rounded-2xl overflow-hidden shadow-sm hover:border-stone-400 transition-all duration-300" data-category="identity">
+            <!-- Header -->
+            <div class="p-6 sm:p-10 border-b border-brand-border bg-stone-50/50 flex flex-wrap items-start justify-between gap-6">
+                <div class="space-y-2 max-w-2xl">
+                    <div class="flex items-center gap-3">
+                        <span class="pdf-label text-xs font-bold px-2.5 py-1 rounded bg-stone-200 text-stone-800">PROJECT 03</span>
+                        <span class="text-xs text-brand-muted font-mono">هویت جامع • کافه و گلخانه گیاهان خاص</span>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-brand-text">
+                        ژوانا (Zhoana Gallery)
+                    </h3>
+                    <p class="text-sm sm:text-base text-brand-muted font-normal leading-relaxed">
+                        هویت بصری کافه و گلخانه گیاهان خاص تزئینی. الهام از آناتومی رگبرگ‌ها و آمیختن آن با خطوط ظریف فنجان قهوه، خلق فضایی آرامش‌بخش و طبیعی در دل کلان‌شهر. ژوانا پیوند یک گلخانه تخصصی با کافه‌ای پر از حس خوب است که مشتریان در آن قهوه می‌نوشند، با لپ‌تاپ کار می‌کنند و از طراوت گیاهان لذت می‌برند.
+                    </p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="font-mono text-xs font-bold text-stone-700 bg-stone-100 px-3 py-1 rounded-full">۱۴۰۲</span>
+                    <a href="https://instagram.com/zhoana_gallery" target="_blank" class="px-4 py-2 rounded-full border border-brand-border text-brand-text text-xs hover:border-black transition-colors flex items-center gap-2">
+                        <span class="pdf-label font-bold">@zhoana_gallery</span>
+                        <span>↗</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Visual Showcase Area -->
+            <div class="p-6 sm:p-10 space-y-6">
+                <!-- Large Interactive Showcase Image -->
+                <div class="relative bg-stone-100 overflow-hidden cursor-pointer group rounded-2xl h-[360px] sm:h-[480px] lg:h-[540px] flex items-center justify-center p-2" onclick="openLightbox(document.getElementById('zhoana-main-img').src, 'ژوانا (Zhoana Gallery) — هویت بصری')">
+                    <img id="zhoana-main-img" src="assets/projects/zhoana/zhoana-cafe-cup.webp" alt="ژوانا (Zhoana Gallery)" class="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-6">
+                        <span class="text-white text-xs font-mono bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-full">کلیک برای مشاهده با کیفیت کامل در لایت‌باکس ↗</span>
+                        <span class="text-white/80 text-xs font-mono">ZHOANA BOTANICAL CAFE</span>
+                    </div>
+                </div>
+
+                <!-- Complete Gallery of All Images (Switchable & Clickable) -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                    <!-- Image 1: Cafe Cup -->
+                    <div onclick="switchImage('zhoana-main-img', 'assets/projects/zhoana/zhoana-cafe-cup.webp', this)" class="gallery-thumb active cursor-pointer rounded-xl overflow-hidden border-2 border-brand-text p-1.5 bg-stone-50 hover:bg-stone-100 transition-all">
+                        <div class="h-24 sm:h-28 rounded-lg overflow-hidden bg-stone-200">
+                            <img src="assets/projects/zhoana/zhoana-cafe-cup.webp" class="w-full h-full object-cover" alt="ماک‌آپ فنجان کافه">
+                        </div>
+                        <p class="text-[11px] font-semibold text-stone-800 text-center mt-1.5 truncate">فنجان و لیوان کافه</p>
+                    </div>
+
+                    <!-- Image 2: Totebag Lifestyle -->
+                    <div onclick="switchImage('zhoana-main-img', 'assets/projects/zhoana/zhoana-totebag.webp', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent p-1.5 bg-stone-50 hover:bg-stone-100 transition-all">
+                        <div class="h-24 sm:h-28 rounded-lg overflow-hidden bg-stone-200">
+                            <img src="assets/projects/zhoana/zhoana-totebag.webp" class="w-full h-full object-cover" alt="بگ پارچه‌ای">
+                        </div>
+                        <p class="text-[11px] font-semibold text-stone-800 text-center mt-1.5 truncate">بگ پارچه‌ای لایف‌استایل</p>
+                    </div>
+
+                    <!-- Image 3: Phone / Digital Mockup -->
+                    <div onclick="switchImage('zhoana-main-img', 'assets/projects/zhoana/zhoana-phone-app.webp', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent p-1.5 bg-stone-50 hover:bg-stone-100 transition-all">
+                        <div class="h-24 sm:h-28 rounded-lg overflow-hidden bg-stone-200">
+                            <img src="assets/projects/zhoana/zhoana-phone-app.webp" class="w-full h-full object-cover" alt="هویت دیجیتال">
+                        </div>
+                        <p class="text-[11px] font-semibold text-stone-800 text-center mt-1.5 truncate">هویت دیجیتال و موبایل</p>
+                    </div>
+
+                    <!-- Image 4: Branding Leaf & Pattern -->
+                    <div onclick="switchImage('zhoana-main-img', 'assets/projects/zhoana/zhoana-branding-leaf.webp', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent p-1.5 bg-stone-50 hover:bg-stone-100 transition-all">
+                        <div class="h-24 sm:h-28 rounded-lg overflow-hidden bg-stone-200">
+                            <img src="assets/projects/zhoana/zhoana-branding-leaf.webp" class="w-full h-full object-cover" alt="نشان برگ">
+                        </div>
+                        <p class="text-[11px] font-semibold text-stone-800 text-center mt-1.5 truncate">نشان رگبرگ و پترن</p>
+                    </div>
+
+                    <!-- Image 5: Greenhouse Lifestyle -->
+                    <div onclick="switchImage('zhoana-main-img', 'assets/projects/zhoana/zhoana-app-lifestyle.webp', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent p-1.5 bg-stone-50 hover:bg-stone-100 transition-all">
+                        <div class="h-24 sm:h-28 rounded-lg overflow-hidden bg-stone-200">
+                            <img src="assets/projects/zhoana/zhoana-app-lifestyle.webp" class="w-full h-full object-cover" alt="اتمسفر گلخانه">
+                        </div>
+                        <p class="text-[11px] font-semibold text-stone-800 text-center mt-1.5 truncate">اتمسفر گیاهان و گلخانه</p>
+                    </div>
+                </div>
+
+                <!-- Tags Row -->
+                <div class="pt-4 border-t border-brand-border flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex flex-wrap gap-2 text-xs text-stone-600">
+                        <span class="px-3 py-1 rounded-full bg-stone-100 border border-stone-200 font-medium">کافه و گیاهان</span>
+                        <span class="px-3 py-1 rounded-full bg-stone-100 border border-stone-200 font-medium">هویت برند</span>
+                        <span class="px-3 py-1 rounded-full bg-stone-100 border border-stone-200 font-medium">طراحی لوگوتایپ</span>
+                        <span class="px-3 py-1 rounded-full bg-stone-100 border border-stone-200 font-medium">پترن ارگانیک رگبرگ</span>
+                    </div>
+                    <span class="text-xs text-brand-muted font-mono">۵ تصویر کامل پروژه</span>
+                </div>
+            </div>
+        </article>
+
+
+        <!-- ============================================== -->
+        <!-- PROJECT 4: VANIL (وانیل) - HOMEMADE SWEETS -->
+        <!-- ============================================== -->
+        <article class="project-item bg-white border border-brand-border rounded-2xl overflow-hidden shadow-sm" data-category="packaging">
+            <!-- Header -->
+            <div class="p-6 sm:p-10 border-b border-brand-border bg-stone-50/50 flex flex-wrap items-start justify-between gap-6">
+                <div class="space-y-2 max-w-2xl">
+                    <div class="flex items-center gap-3">
+                        <span class="pdf-label text-xs font-bold px-2.5 py-1 rounded bg-stone-200 text-stone-800">PROJECT 04</span>
+                        <span class="text-xs text-brand-muted font-mono">تولید شیرینی و کیک خانگی • هویت بصری و بسته‌بندی</span>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-brand-text">طراحی لوگو و هویت بصری وانیل</h3>
+                    <p class="text-sm sm:text-base text-brand-muted font-normal leading-relaxed">
+                        کانسپت فرمی: <strong class="text-brand-text">تلفیق هوشمندانه حرف «و» با فرم برش کیک</strong> تا هم اول اسم در ذهن مخاطب بنشیند و هم ماهیت محصول فوراً منتقل شود.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="rounded-2xl overflow-hidden bg-stone-50 border border-brand-border cursor-pointer group flex items-center justify-center p-3" onclick="openLightbox(document.getElementById('vanil-main-img').src, 'وانیل — بسته‌بندی شیرینی و کوکی')">
+                        <img id="vanil-main-img" src="assets/projects/vanil/vanil-logo-concept.webp" alt="وانیل" class="w-full max-h-[500px] object-contain rounded-xl group-hover:scale-[1.01] transition-transform duration-500">
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-3">
+                        <div onclick="switchImage('vanil-main-img', 'assets/projects/vanil/vanil-logo-concept.webp', this)" class="gallery-thumb active cursor-pointer rounded-xl overflow-hidden border-2 border-brand-text p-1 bg-stone-50">
+                            <img src="assets/projects/vanil/vanil-logo-concept.webp" class="w-full h-20 object-cover rounded-lg" alt="کانسپت وانیل">
+                            <p class="text-[10px] font-medium text-center mt-1">کانسپت نشان و جعبه</p>
+                        </div>
+                        <div onclick="switchImage('vanil-main-img', 'assets/projects/vanil/vanil-dubai-lineup.webp', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent p-1 bg-stone-50">
+                            <img src="assets/projects/vanil/vanil-dubai-lineup.webp" class="w-full h-20 object-cover rounded-lg" alt="شکلات دبی">
+                            <p class="text-[10px] font-medium text-center mt-1">کوکی و شکلات دبی</p>
+                        </div>
+                        <div onclick="switchImage('vanil-main-img', 'assets/projects/vanil/vanil-packaging-labels.webp', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent p-1 bg-stone-50">
+                            <img src="assets/projects/vanil/vanil-packaging-labels.webp" class="w-full h-20 object-cover rounded-lg" alt="لیبل‌های وانیل">
+                            <p class="text-[10px] font-medium text-center mt-1">لیبل‌ها و استیکرها</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-stone-50 p-6 rounded-2xl border border-brand-border">
+                        <h4 class="pdf-label text-xs font-bold text-brand-muted uppercase mb-2">DESIGN STORY (داستان طرح)</h4>
+                        <p class="text-sm text-stone-700 leading-relaxed font-normal">
+                            کسب و کار تولید شیرینی‌جات خانگی به اسم «وانیل» برای شروع کارشان و تمایز در رقابت بازار نیاز به هویت بصری داشتند. لوگوی تصویری از ترکیب حرف «و» و فرم کیک شکل گرفت و استیکرهای نگهداری با فونت خوانای Noto Sans پیاده شد.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-brand-border bg-white flex items-center justify-between">
+                        <div>
+                            <p class="pdf-label text-xs text-brand-muted">TYPEFACE:</p>
+                            <p class="text-sm font-semibold text-brand-text">Noto Sans (خوانایی بالا در ابعاد کوچک چاپ)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+        <!-- ============================================== -->
+        <!-- PROJECT 5: SALMA (سَلما) - WOMEN HEALTHCARE -->
+        <!-- ============================================== -->
+        <article class="project-item bg-white border border-brand-border rounded-2xl overflow-hidden shadow-sm" data-category="identity">
+            <!-- Header -->
+            <div class="p-6 sm:p-10 border-b border-brand-border bg-stone-50/50 flex flex-wrap items-start justify-between gap-6">
+                <div class="space-y-2 max-w-2xl">
+                    <div class="flex items-center gap-3">
+                        <span class="pdf-label text-xs font-bold px-2.5 py-1 rounded bg-stone-200 text-stone-800">PROJECT 05</span>
+                        <span class="text-xs text-brand-muted font-mono">مراقبت سلامت زنان • فعال در ایران و عراق</span>
+                    </div>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-brand-text">طراحی لوگو و هویت بصری سَلما</h3>
+                    <p class="text-base text-brand-accent font-semibold">«تعادل هورمون‌ها ، تعادل زندگی»</p>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="rounded-2xl overflow-hidden bg-stone-50 border border-brand-border cursor-pointer group flex items-center justify-center p-3" onclick="openLightbox(document.getElementById('salma-main-img').src, 'سلما — هویت سلامت بانوان')">
+                        <img id="salma-main-img" src="assets/projects/salma/salma-brand-story.webp" alt="سلما" class="w-full max-h-[500px] object-contain rounded-xl group-hover:scale-[1.01] transition-transform duration-500">
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-3">
+                        <div onclick="switchImage('salma-main-img', 'assets/projects/salma/salma-brand-story.webp', this)" class="gallery-thumb active cursor-pointer rounded-xl overflow-hidden border-2 border-brand-text p-1 bg-stone-50">
+                            <img src="assets/projects/salma/salma-brand-story.webp" class="w-full h-20 object-cover rounded-lg" alt="نشان سلما">
+                            <p class="text-[10px] font-medium text-center mt-1">نشان و هویت برند</p>
+                        </div>
+                        <div onclick="switchImage('salma-main-img', 'assets/projects/salma/salma-digital-mockup.webp', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent p-1 bg-stone-50">
+                            <img src="assets/projects/salma/salma-digital-mockup.webp" class="w-full h-20 object-cover rounded-lg" alt="ماک‌آپ دیجیتال">
+                            <p class="text-[10px] font-medium text-center mt-1">ماک‌آپ اپلیکیشن</p>
+                        </div>
+                        <div onclick="switchImage('salma-main-img', 'assets/projects/salma/salma-ai-identity.webp', this)" class="gallery-thumb cursor-pointer rounded-xl overflow-hidden border-2 border-transparent p-1 bg-stone-50">
+                            <img src="assets/projects/salma/salma-ai-identity.webp" class="w-full h-20 object-cover rounded-lg" alt="هوش مصنوعی">
+                            <p class="text-[10px] font-medium text-center mt-1">توسعه با هوش مصنوعی</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-stone-50 p-6 rounded-2xl border border-brand-border">
+                        <h4 class="pdf-label text-xs font-bold text-brand-muted uppercase mb-2">DESIGN STORY (داستان طرح)</h4>
+                        <p class="text-sm text-stone-700 leading-relaxed font-normal">
+                            سَلما یک مجموعه تخصصی مراقبت سلامت زنان است که خانم‌ها را در مسیر رسیدن به تعادل هورمونی و زندگی بهتر همراهی می‌کند و هم در ایران و هم در عراق فعالیت دارد. در این پروژه استفاده موثری از هوش مصنوعی در جهت ارتقای وجهه برند صورت گرفته است.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-brand-border bg-white">
+                        <p class="pdf-label text-xs text-brand-muted">MARKET SCOPE:</p>
+                        <p class="text-sm font-semibold text-brand-text mt-1">فعال در دو کشور ایران و عراق (دیزاین دوزبانه)</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+        <!-- ============================================== -->
+        <!-- PROJECT 6 & 7: CABINO DESIGN & TITI & NINI -->
+        <!-- ============================================== -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- CABINO DESIGN -->
+            <article class="project-item bg-white border border-brand-border rounded-2xl overflow-hidden shadow-sm" data-category="redesign">
+                <div class="p-6 border-b border-brand-border bg-stone-50/50">
+                    <span class="pdf-label text-xs font-bold px-2 py-0.5 rounded bg-stone-200 text-stone-800">PROJECT 06</span>
+                    <h3 class="text-2xl font-extrabold text-brand-text mt-2">ریدیزاین لوگوی کابینو دیزاین</h3>
+                    <p class="text-xs text-brand-muted mt-1">تولید و نصب کابینت و دکوراسیون داخلی با ۵۰ سال سابقه</p>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div class="rounded-xl overflow-hidden bg-stone-50 border border-brand-border p-2 cursor-pointer group flex items-center justify-center" onclick="openLightbox(document.getElementById('cabino-main-img').src, 'کابینو دیزاین — ریدیزاین لوگو مونوکروم')">
+                        <img id="cabino-main-img" src="assets/projects/cabino/cabino-story-concept.webp" class="w-full max-h-72 object-contain rounded-lg group-hover:scale-[1.01] transition-transform duration-500" alt="کابینو دیزاین">
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div onclick="switchImage('cabino-main-img', 'assets/projects/cabino/cabino-story-concept.webp', this)" class="gallery-thumb active cursor-pointer p-1 rounded-lg border border-brand-text bg-stone-50">
+                            <img src="assets/projects/cabino/cabino-story-concept.webp" class="h-16 w-full object-cover rounded">
+                            <p class="text-[9px] text-center mt-0.5">داستان ریدیزاین</p>
+                        </div>
+                        <div onclick="switchImage('cabino-main-img', 'assets/projects/cabino/cabino-stationery-cards.webp', this)" class="gallery-thumb cursor-pointer p-1 rounded-lg border border-transparent bg-stone-50">
+                            <img src="assets/projects/cabino/cabino-stationery-cards.webp" class="h-16 w-full object-cover rounded">
+                            <p class="text-[9px] text-center mt-0.5">کارت و اوراق</p>
+                        </div>
+                        <div onclick="switchImage('cabino-main-img', 'assets/projects/cabino/cabino-monochrome-cards.webp', this)" class="gallery-thumb cursor-pointer p-1 rounded-lg border border-transparent bg-stone-50">
+                            <img src="assets/projects/cabino/cabino-monochrome-cards.webp" class="h-16 w-full object-cover rounded">
+                            <p class="text-[9px] text-center mt-0.5">پالت مونوکروم</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-stone-600 leading-relaxed font-normal">
+                        برند با سابقه نزدیک به نیم قرن تصمیم گرفت با ریدیزاین لوگو، تصویری مدرن‌تر و مقتدرتر بر پایه پالت مونوکروم (#000000 / #FFFFFF) ارائه دهد.
+                    </p>
+                </div>
+            </article>
+
+            <!-- TITI & NINI -->
+            <article class="project-item bg-white border border-brand-border rounded-2xl overflow-hidden shadow-sm" data-category="packaging">
+                <div class="p-6 border-b border-brand-border bg-stone-50/50">
+                    <span class="pdf-label text-xs font-bold px-2 py-0.5 rounded bg-stone-200 text-stone-800">PROJECT 07</span>
+                    <h3 class="text-2xl font-extrabold text-brand-text mt-2">پوشاک کودک تی‌تی و نی‌نی</h3>
+                    <p class="text-xs text-brand-muted mt-1">طراحی لوگو، اتیکت لباس و سیستم رنگی کودک و نوجوان</p>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div class="rounded-xl overflow-hidden bg-stone-50 border border-brand-border p-2 cursor-pointer group flex items-center justify-center" onclick="openLightbox(document.getElementById('titi-main-img').src, 'تی‌تی و نی‌نی — پوشاک کودک و نوجوان')">
+                        <img id="titi-main-img" src="assets/projects/titi-nini/titi-story-logo.webp" class="w-full max-h-72 object-contain rounded-lg group-hover:scale-[1.01] transition-transform duration-500" alt="تی‌تی و نی‌نی">
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div onclick="switchImage('titi-main-img', 'assets/projects/titi-nini/titi-story-logo.webp', this)" class="gallery-thumb active cursor-pointer p-1 rounded-lg border border-brand-text bg-stone-50">
+                            <img src="assets/projects/titi-nini/titi-story-logo.webp" class="h-16 w-full object-cover rounded">
+                            <p class="text-[9px] text-center mt-0.5">لوگو و بریف</p>
+                        </div>
+                        <div onclick="switchImage('titi-main-img', 'assets/projects/titi-nini/titi-clothing-tags.webp', this)" class="gallery-thumb cursor-pointer p-1 rounded-lg border border-transparent bg-stone-50">
+                            <img src="assets/projects/titi-nini/titi-clothing-tags.webp" class="h-16 w-full object-cover rounded">
+                            <p class="text-[9px] text-center mt-0.5">تگ لباس</p>
+                        </div>
+                        <div onclick="switchImage('titi-main-img', 'assets/projects/titi-nini/titi-packaging-showcase.webp', this)" class="gallery-thumb cursor-pointer p-1 rounded-lg border border-transparent bg-stone-50">
+                            <img src="assets/projects/titi-nini/titi-packaging-showcase.webp" class="h-16 w-full object-cover rounded">
+                            <p class="text-[9px] text-center mt-0.5">بسته‌بندی</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-stone-600 leading-relaxed font-normal">
+                        استفاده از تایپ فانتزی و پالت رنگی شاداب که با مخاطب و مصرف‌کننده محصول (کودکان و والدین) همخوانی کامل دارد.
+                    </p>
+                </div>
+            </article>
+        </div>
+
+    </main>
+
+    <!-- 5. DESIGN PROCESS SECTION -->
+    <section id="process" class="bg-white border-y border-brand-border py-20 my-16">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
+            <div class="max-w-2xl mb-12">
+                <span class="pdf-label text-xs font-bold text-brand-muted tracking-wider">HOW I WORK</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-text mt-2">فرآیند مهندسی هویت بصری</h2>
+                <p class="text-sm sm:text-base text-brand-muted mt-2">طراحی لوگو یک حدس و گمان نیست؛ متدولوژی دقیق کشف فرم و حل مسئله است.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl bg-stone-50 border border-brand-border space-y-4">
+                    <span class="pdf-label text-3xl font-bold text-stone-300">01</span>
+                    <h3 class="text-lg font-bold text-brand-text">کشف، بریف و تحلیل جوهره</h3>
+                    <p class="text-xs sm:text-sm text-brand-muted leading-relaxed font-normal">
+                        بررسی ارزش‌های بنیادین، روانشناسی بازار هدف و استخراج کلمات کلیدی هویت برند (همانند کانسپت‌های مینیمال، پریمیوم و اصالت ایرانی در پروژه ایراتن).
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-stone-50 border border-brand-border space-y-4">
+                    <span class="pdf-label text-3xl font-bold text-stone-300">02</span>
+                    <h3 class="text-lg font-bold text-brand-text">اتودهای دستی و گرید هندسی</h3>
+                    <p class="text-xs sm:text-sm text-brand-muted leading-relaxed font-normal">
+                        ترسیم اتودهای مدادی روی کاغذ، تست اتودهای چندگانه و سپس ساخت وکتور بر پایه نسبت‌های طلایی و شبکه‌بندی دقیق خطوط راهنما.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-stone-50 border border-brand-border space-y-4">
+                    <span class="pdf-label text-3xl font-bold text-stone-300">03</span>
+                    <h3 class="text-lg font-bold text-brand-text">سیستم جامع و توسعه هویت</h3>
+                    <p class="text-xs sm:text-sm text-brand-muted leading-relaxed font-normal">
+                        استخراج پالت رنگی استاندارد، انتخاب تایپ‌فیس‌های سازگار فارسی و لاتین، و پیاده‌سازی روی ماک‌آپ‌های واقعی بسته‌بندی، محیطی و دیجیتال.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. ABOUT ME SECTION -->
+    <section id="about" class="max-w-7xl mx-auto px-5 sm:px-8 py-16">
+        <div class="bg-stone-100/70 border border-brand-border rounded-3xl p-8 sm:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div class="lg:col-span-8 space-y-6">
+                <span class="pdf-label text-xs font-bold text-brand-muted">ABOUT THE DESIGNER</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-text">محمد جواد کرمانی</h2>
+                <p class="text-base sm:text-lg text-stone-700 leading-relaxed font-normal">
+                    طراح لوگو و هویت بصری و دانشجوی کارشناسی رشته گرافیک. 
+                    هدف من در هر پروژه خلق زبانی است که فراتر از کلیشه‌های روزمره حرکت کند؛ زبانی که کرسی‌ها و پیچش‌های خط فارسی را با نظم و مینیمالیسم طراحی بین‌المللی گره می‌زند.
+                </p>
+
+                <div class="pt-4 border-t border-brand-border flex flex-wrap gap-2 text-xs font-mono">
+                    <span class="px-3.5 py-1.5 rounded-full bg-white border border-brand-border text-stone-800">طراحی لوگو و مونوگرام</span>
+                    <span class="px-3.5 py-1.5 rounded-full bg-white border border-brand-border text-stone-800">کتابچه هویت بصری</span>
+                    <span class="px-3.5 py-1.5 rounded-full bg-white border border-brand-border text-stone-800">تایپوگرافی کاستوم</span>
+                    <span class="px-3.5 py-1.5 rounded-full bg-white border border-brand-border text-stone-800">بسته‌بندی و پکیجینگ</span>
+                    <span class="px-3.5 py-1.5 rounded-full bg-white border border-brand-border text-stone-800">Adobe Illustrator</span>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 flex flex-col items-center text-center p-6 bg-white rounded-2xl border border-brand-border shadow-sm">
+                <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-brand-border mb-4 bg-stone-100">
+                    <img src="assets/profile/profile-avatar.webp" class="w-full h-full object-cover" alt="محمد جواد کرمانی">
+                </div>
+                <h3 class="font-bold text-brand-text">محمد جواد کرمانی</h3>
+                <p class="pdf-label text-xs text-brand-muted mt-1">JIMDESIGN.IR</p>
+                <div class="mt-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span class="text-xs text-stone-600 font-medium">پاسخ‌گویی سریع برای پروژه‌ها</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FOOTER & CONTACT -->
+    <footer id="contact" class="bg-brand-text text-white py-20 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 space-y-12">
+            <div class="max-w-3xl space-y-4">
+                <span class="pdf-label text-xs font-bold text-stone-400">FOLLOW ME & CONNECT</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                    ممنون از همراهیتون؛ خوشحال میشم در ارتباط باشیم.
+                </h2>
+                <p class="text-sm sm:text-base text-stone-400 font-light">
+                    برای سفارش طراحی لوگو، هویت بصری کامل برند یا بازطراحی، می‌توانید مستقیماً از طریق ایمیل یا شبکه‌های اجتماعی با من در ارتباط باشید.
+                </p>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="flex flex-wrap items-center gap-4">
+                <button onclick="copyEmail()" class="px-6 py-3.5 rounded-full bg-white text-black text-sm font-semibold hover:bg-stone-200 transition-colors flex items-center gap-2">
+                    <span id="emailText">jimdesign.ir@gmail.com</span>
+                    <span class="text-xs text-stone-500 font-mono">[کپی ایمیل]</span>
+                </button>
+
+                <a href="https://instagram.com/jimdesign" target="_blank" class="px-6 py-3.5 rounded-full border border-stone-700 text-stone-200 text-sm hover:border-white hover:text-white transition-colors">
+                    اینستاگرام (@jimdesign)
+                </a>
+
+                <a href="https://t.me/m_javad_kermani" target="_blank" class="px-6 py-3.5 rounded-full border border-stone-700 text-stone-200 text-sm hover:border-white hover:text-white transition-colors">
+                    تلگرام
+                </a>
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-10 border-t border-stone-800 flex flex-wrap items-center justify-between gap-4 text-xs text-stone-500">
+                <p>© ۲۰۲۶ محمد جواد کرمانی (JIMDESIGN) — تمامی حقوق محفوظ است.</p>
+                <p class="pdf-label text-[11px] text-stone-400">MJAVAD.KERMANY • JIMDESIGN.IR</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================== -->
+    <!-- LIGHTBOX / FULLSCREEN MODAL -->
+    <!-- ============================================== -->
+    <div id="lightboxModal" class="hidden-modal fixed inset-0 z-50 bg-black/92 backdrop-blur-md flex flex-col items-center justify-between p-4 sm:p-8">
+        <div class="w-full flex items-center justify-between text-white max-w-6xl">
+            <span id="modalCaption" class="text-sm sm:text-base font-medium text-stone-300">عنوان تصویر</span>
+            <button onclick="closeLightbox()" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-mono transition-colors">
+                ✕ بستن [ESC]
+            </button>
+        </div>
+
+        <div class="flex-1 flex items-center justify-center my-4 max-w-6xl w-full overflow-hidden">
+            <img id="modalImg" src="" class="max-h-[82vh] max-w-full object-contain rounded shadow-2xl transition-opacity duration-200">
+        </div>
+
+        <div id="sliderControls" class="w-full max-w-xl flex items-center justify-between text-white text-xs font-mono hidden">
+            <button onclick="prevSlide()" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20">← اسلاید قبلی</button>
+            <span id="slideIndicator" class="text-stone-400">اسلاید ۱ از ۳۳</span>
+            <button onclick="nextSlide()" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20">اسلاید بعدی →</button>
+        </div>
     </div>
+
+    <!-- ============================================== -->
+    <!-- JAVASCRIPT LOGIC -->
+    <!-- ============================================== -->
+    <script>
+        // 1. Switch Iratan Main Display (Supports Vector Logo, Hand Sketch, Mockups)
+        function switchIratan(newSrc, caption, thumbElement) {
+            const mainImg = document.getElementById('iratan-main-img');
+            const mainCaption = document.getElementById('iratan-main-caption');
+            if (!mainImg) return;
+
+            mainImg.style.opacity = '0.3';
+            setTimeout(() => {
+                mainImg.src = newSrc;
+                if (mainCaption && caption) mainCaption.textContent = caption;
+                mainImg.style.opacity = '1';
+            }, 120);
+
+            // Active thumb
+            const allThumbs = document.querySelectorAll('#iratan .gallery-thumb');
+            allThumbs.forEach(t => {
+                t.classList.remove('active', 'border-brand-text');
+                t.classList.add('border-transparent');
+            });
+            if (thumbElement) {
+                thumbElement.classList.add('active', 'border-brand-text');
+                thumbElement.classList.remove('border-transparent');
+            }
+        }
+
+        // 2. Switch Project Active Image
+        function switchImage(targetImgId, newSrc, thumbElement) {
+            const targetImg = document.getElementById(targetImgId);
+            if (!targetImg) return;
+            
+            targetImg.style.opacity = '0.3';
+            setTimeout(() => {
+                targetImg.src = newSrc;
+                targetImg.style.opacity = '1';
+            }, 120);
+
+            if (thumbElement && thumbElement.parentElement) {
+                const thumbs = thumbElement.parentElement.querySelectorAll('.gallery-thumb');
+                thumbs.forEach(t => {
+                    t.classList.remove('active', 'border-brand-text');
+                    t.classList.add('border-transparent');
+                });
+                thumbElement.classList.add('active', 'border-brand-text');
+                thumbElement.classList.remove('border-transparent');
+            }
+        }
+
+        // 3. Filter Category
+        function filterCategory(cat) {
+            const articles = document.querySelectorAll('.project-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-text', 'text-white');
+                btn.classList.add('bg-white', 'text-brand-muted');
+            });
+
+            const activeBtn = document.getElementById('btn-' + cat);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-brand-text', 'text-white');
+                activeBtn.classList.remove('bg-white', 'text-brand-muted');
+            }
+
+            articles.forEach(art => {
+                if (cat === 'all' || art.getAttribute('data-category') === cat) {
+                    art.style.display = 'block';
+                } else {
+                    art.style.display = 'none';
+                }
+            });
+        }
+
+        // 4. Lightbox Functions
+        const modal = document.getElementById('lightboxModal');
+        const modalImg = document.getElementById('modalImg');
+        const modalCaption = document.getElementById('modalCaption');
+        const sliderControls = document.getElementById('sliderControls');
+        const slideIndicator = document.getElementById('slideIndicator');
+
+        let currentSlideIndex = 0;
+        let isIratanSliderActive = false;
+
+        function openLightbox(src, caption) {
+            isIratanSliderActive = false;
+            sliderControls.classList.add('hidden');
+            modalImg.src = src;
+            modalCaption.textContent = caption || 'نمایش اثر';
+            modal.classList.remove('hidden-modal');
+            modal.classList.add('active-modal');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            modal.classList.remove('active-modal');
+            modal.classList.add('hidden-modal');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 5. Iratan 33-slide deck viewer
+        function openIratanSlider(index) {
+            currentSlideIndex = index;
+            isIratanSliderActive = true;
+            sliderControls.classList.remove('hidden');
+            updateSliderImage();
+            modal.classList.remove('hidden-modal');
+            modal.classList.add('active-modal');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateSliderImage() {
+            const slideNum = String(currentSlideIndex + 1).padStart(2, '0');
+            modalImg.src = `assets/projects/iratan/slides/slide-${slideNum}.webp`;
+            modalCaption.textContent = `پرزنتیشن هویت بصری ایراتن — اسلاید شماره ${currentSlideIndex + 1} از ۳۳`;
+            slideIndicator.textContent = `اسلاید ${currentSlideIndex + 1} از ۳۳`;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < 32) {
+                currentSlideIndex++;
+                updateSliderImage();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSliderImage();
+            }
+        }
+
+        // Keyboard Controls
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+            if (isIratanSliderActive) {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') prevSlide();
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') nextSlide();
+            }
+        });
+
+        // Copy HEX
+        function copyHex(hex) {
+            navigator.clipboard.writeText(hex).then(() => {
+                alert('کد رنگ ' + hex + ' کپی شد!');
+            });
+        }
+
+        // Copy Email
+        function copyEmail() {
+            navigator.clipboard.writeText('jimdesign.ir@gmail.com').then(() => {
+                const el = document.getElementById('emailText');
+                const orig = el.textContent;
+                el.textContent = 'ایمیل با موفقیت کپی شد!';
+                setTimeout(() => {
+                    el.textContent = orig;
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
